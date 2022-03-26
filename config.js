@@ -12,8 +12,8 @@ export default {
 
 export const validateEnvironmentVariables = () => {
   const environmentVariables = [
-    "NODE_ENV",
-    "PORT"
+    'NODE_ENV',
+    'PORT',
   ];
   const missingEnvironmentVariables = [];
 
