@@ -2,8 +2,10 @@ import express from 'express';
 import logger from './logger.js';
 import envVar, { validateEnvironmentVariables } from './config.js';
 import userRouter from './modules/user/userRouter.js';
+import { testConnection } from './db.js';
 
 validateEnvironmentVariables();
+testConnection();
 
 const app = express();
 const port = envVar.PORT;
