@@ -1,6 +1,6 @@
 {
   "env": {
-    "browser": true,
+    "node": true,
     "es2021": true
   },
   "extends": [
@@ -11,11 +11,8 @@
     "sourceType": "module"
   },
   "rules": {
-    "import/extensions": [
-      "error",
-      {
-          "js": "ignorePackages"
-      }
-    ]
+    "import/extensions": [2, { "js": "always", "json": "always" }],
+    "linebreak-style": 0,
+    "newline-before-return": "error"
   }
 }

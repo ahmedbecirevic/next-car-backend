@@ -1,7 +1,7 @@
 import { Sequelize } from 'sequelize';
 
-import sequelize from '../../db';
-import Car from '../car/carModel';
+import sequelize from '../../db.js';
+import Car from '../car/carModel.js';
 
 const User = sequelize.define('users', {
   email: {
