@@ -1,5 +1,7 @@
 import express from 'express';
 import cors from 'cors';
+import swaggerUiExpress from 'swagger-ui-express';
+import swaggerJsdoc from 'swagger-jsdoc';
 
 import logger from './logger.js';
 import envVar, { validateEnvironmentVariables } from './config.js';
@@ -14,6 +16,25 @@ const app = express();
 const port = envVar.PORT;
 const router = express.Router();
 
+const options = {
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'NextCar API',
+      version: '1.0.0',
+      description: 'Description for V1',
+    },
+    servers: [
+      {
+        url: 'http://localhost:8080',
+      },
+    ],
+  },
+  apis: ['./modules/car/carRouter.js', './modules/user/userRouter.js'],
+};
+
+const specs = swaggerJsdoc(options);
+
 app.use(
   cors({
     origin: envVar.FRONTEND_ORIGIN,
@@ -25,6 +46,12 @@ app.use(
 router.get('/', (req, res) => {
   res.send('hello world');
 });
+
+app.use(
+  '/api-docs',
+  swaggerUiExpress.serve,
+  swaggerUiExpress.setup(specs),
+);
 
 app.use('/', router);
 app.use('/user', userRouter);

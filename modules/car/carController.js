@@ -1,10 +1,15 @@
 import { responseNotFound, responseOk } from '../../utils/responses.js';
-import { getCar } from './carService.js';
+import { getCar, getCars } from './carService.js';
 
-// eslint-disable-next-line import/prefer-default-export
+export const getAllCars = async (req, res) => {
+  const cars = await getCars();
+
+  return responseOk(res, cars);
+};
+
 export const getCarFromIdParam = async (req, res) => {
-  const { carId } = req.params;
-  const car = await getCar(carId);
+  const { id } = req.params;
+  const car = await getCar(id);
 
   if (!car) {
     return responseNotFound(res);

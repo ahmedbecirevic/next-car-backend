@@ -1,5 +1,5 @@
-import { getCarById } from './carDal.js';
+import { getCarByIdDb, getCarsDb } from './carDal.js';
 
-export const getCar = (carId) => getCarById(carId);
+export const getCar = (carId) => getCarByIdDb(carId);
 
-export const getCars = () => {};
+export const getCars = () => getCarsDb();
