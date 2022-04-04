@@ -1,6 +1,6 @@
 import express from 'express';
 import errorHandler from '../../utils/errorHandler.js';
-import { getCarFromIdParam, getAllCars } from './carController.js';
+import { getCar, getCars } from './carController.js';
 import { getCarByIdValidators } from './carValidators.js';
 import validationMiddleware from '../../middlewares/validationMiddleware.js';
 
@@ -51,7 +51,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /car:
+ * /cars:
  *   get:
  *     summary: Returns the list of all the cars
  *     tags: [Cars]
@@ -67,12 +67,12 @@ const router = express.Router();
  */
 router.get(
   '/',
-  errorHandler(getAllCars),
+  errorHandler(getCars),
 );
 
 /**
  * @swagger
- * /car/{id}:
+ * /cars/{id}:
  *  get:
  *    summary: Get car by ID.
  *    tags: [Cars]
@@ -99,7 +99,7 @@ router.get(
   '/:id',
   getCarByIdValidators,
   validationMiddleware,
-  errorHandler(getCarFromIdParam),
+  errorHandler(getCar),
 );
 
 export default router;

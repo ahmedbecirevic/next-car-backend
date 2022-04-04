@@ -55,7 +55,7 @@ app.use(
 
 app.use('/', router);
 app.use('/user', userRouter);
-app.use('/car', carRouter);
+app.use('/cars', carRouter);
 
 app.use((error, req, res, next) => {
   if (res.headerSent) {

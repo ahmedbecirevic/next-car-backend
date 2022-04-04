@@ -1,5 +1,5 @@
 import Car from './carModel.js';
 
-export const getCarByIdDb = (id) => Car.findByPk(id);
+export const getCarById = (id) => Car.findByPk(id);
 
-export const getCarsDb = () => Car.findAll();
+export const getCars = () => Car.findAll();
