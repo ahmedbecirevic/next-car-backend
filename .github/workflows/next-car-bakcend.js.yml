@@ -15,4 +15,3 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: 
         npm i
-        cd db/ && npm run migrate && cd ../
