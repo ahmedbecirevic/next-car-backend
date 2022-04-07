@@ -41,5 +41,5 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
-    - run: cd db/ && npm run migrate && cd ../
+    # - run: cd db/ && npm run migrate && cd ../
     - run: NODE_ENV=production npm start
