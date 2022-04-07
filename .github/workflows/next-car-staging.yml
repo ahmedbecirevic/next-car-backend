@@ -37,9 +37,17 @@ jobs:
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
+      env:
+        PORT: ${{ secrets.PORT }}
+        DB_HOST: ${{ secrets.DB_HOST }}
+        DB_NAME: ${{ secrets.DB_NAME }}
+        DB_USER: ${{ secrets.DB_USER }}
+        DB_HOST_PASSWORD: ${{ secrets.DB_HOST_PASSWORD }}
+        DB_DIALECT: ${{ secrets.DB_DIALECT }}
+        FRONTEND_ORIGIN: ${{ secrets.FRONTEND_ORIGIN }}
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
-    # - run: cd db/ && npm run migrate && cd ../
+    - run: cd db/ && npm run migrate && cd ../
     - run: NODE_ENV=production npm start
