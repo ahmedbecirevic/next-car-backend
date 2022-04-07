@@ -41,8 +41,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
-    - run: cd db/ && npm run migrate && cd ../
-    - run: NODE_ENV=production npm start
       env:
         PORT: ${{ secrets.PORT }}
         DB_HOST: ${{ secrets.DB_HOST }}
@@ -51,3 +49,5 @@ jobs:
         DB_HOST_PASSWORD: ${{ secrets.DB_HOST_PASSWORD }}
         DB_DIALECT: ${{ secrets.DB_DIALECT }}
         FRONTEND_ORIGIN: ${{ secrets.FRONTEND_ORIGIN }}
+    - run: cd db/ && npm run migrate && cd ../
+    - run: NODE_ENV=production npm start
