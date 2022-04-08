@@ -32,7 +32,14 @@ jobs:
       matrix:
         node-version: [12.x, 14.x, 16.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
+    env:
+      PORT: ${{ secrets.PORT }}
+      DB_HOST: ${{ secrets.DB_HOST }}
+      DB_NAME: ${{ secrets.DB_NAME }}
+      DB_USER: ${{ secrets.DB_USER }}
+      DB_HOST_PASSWORD: ${{ secrets.DB_HOST_PASSWORD }}
+      DB_DIALECT: ${{ secrets.DB_DIALECT }}
+      FRONTEND_ORIGIN: ${{ secrets.FRONTEND_ORIGIN }}
     steps:
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
@@ -40,14 +47,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-      env:
-        PORT: ${{ secrets.PORT }}
-        DB_HOST: ${{ secrets.DB_HOST }}
-        DB_NAME: ${{ secrets.DB_NAME }}
-        DB_USER: ${{ secrets.DB_USER }}
-        DB_HOST_PASSWORD: ${{ secrets.DB_HOST_PASSWORD }}
-        DB_DIALECT: ${{ secrets.DB_DIALECT }}
-        FRONTEND_ORIGIN: ${{ secrets.FRONTEND_ORIGIN }}
     - name: Print env var
       run: echo $PORT
     # - run: npm ci
