@@ -7,7 +7,7 @@ import logger from './logger.js';
 import envVar, { validateEnvironmentVariables } from './config.js';
 import userRouter from './modules/user/userRouter.js';
 import carRouter from './modules/car/carRouter.js';
-import { testConnection } from './db.js';
+import { testConnection } from './database.js';
 
 validateEnvironmentVariables();
 testConnection();
