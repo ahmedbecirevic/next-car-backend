@@ -47,8 +47,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - name: Print env var
-      run: echo $PORT
-    # - run: npm ci
-    # - run: cd db/ && npm run migrate && cd ../
-    # - run: NODE_ENV=production npm start
+    - run: npm ci
+    - run: cd db/ && npm run migrate && cd ../
+    - run: NODE_ENV=production npm start
