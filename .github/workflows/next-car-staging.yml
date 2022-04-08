@@ -39,6 +39,7 @@ jobs:
       DB_USER: ${{ secrets.DB_USER }}
       DB_HOST_PASSWORD: ${{ secrets.DB_HOST_PASSWORD }}
       DB_DIALECT: ${{ secrets.DB_DIALECT }}
+      DB_PORT: ${{ secrets.DB_PORT }}
       FRONTEND_ORIGIN: ${{ secrets.FRONTEND_ORIGIN }}
     steps:
     - uses: actions/checkout@v3
@@ -48,5 +49,5 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
-    # - run: cd db/ && npm run migrate && cd ../
+    - run: cd db/ && npm run migrate && cd ../
     - run: NODE_ENV=production npm start
