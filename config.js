@@ -13,6 +13,7 @@ export default {
   DB_USER: envVar.DB_USER,
   DB_HOST_PASSWORD: envVar.DB_HOST_PASSWORD,
   DB_DIALECT: envVar.DB_DIALECT,
+  DB_PORT: envVar.DB_PORT,
   FRONTEND_ORIGIN: envVar.FRONTEND_ORIGIN,
 };
 
@@ -25,6 +26,7 @@ export const validateEnvironmentVariables = () => {
     'DB_USER',
     'DB_HOST_PASSWORD',
     'DB_DIALECT',
+    'DB_PORT',
     'FRONTEND_ORIGIN',
   ];
   const missingEnvironmentVariables = [];

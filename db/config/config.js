@@ -24,5 +24,6 @@ module.exports = {
     database: envVar.DB_NAME,
     host: envVar.DB_HOST,
     dialect: envVar.DB_DIALECT,
+    port: envVar.PORT,
   },
 };
