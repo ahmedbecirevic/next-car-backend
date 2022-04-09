@@ -67,7 +67,7 @@ app.use((error, req, res, next) => {
 });
 
 app.listen(port, () => {
-  logger.info(`App listening at http://localhost:${port}`);
+  logger.info(`App listening at PORT:${port}`);
 });
 
 export default app;
