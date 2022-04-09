@@ -25,5 +25,11 @@ module.exports = {
     host: envVar.DB_HOST,
     dialect: envVar.DB_DIALECT,
     port: envVar.DB_PORT,
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
   },
 };
