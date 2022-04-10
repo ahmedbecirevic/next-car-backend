@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize';
 
-import sequelize from '../../db.js';
+import sequelize from '../../database.js';
 import Car from '../car/carModel.js';
 
 const User = sequelize.define('users', {
