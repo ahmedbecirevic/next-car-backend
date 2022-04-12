@@ -15,6 +15,9 @@ const User = sequelize.define('users', {
   phoneNumber: {
     type: Sequelize.STRING,
   },
+  googleId: {
+    type: Sequelize.STRING,
+  },
 }, {
   underscored: true,
 });

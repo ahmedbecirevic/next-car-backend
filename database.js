@@ -9,12 +9,12 @@ const sequelize = new Sequelize({
   password: config.DB_HOST_PASSWORD,
   dialect: config.DB_DIALECT,
   port: config.DB_PORT,
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false,
-    },
-  },
+  // dialectOptions: {
+  //   ssl: {
+  //     require: true,
+  //     rejectUnauthorized: false,
+  //   },
+  // },
 });
 
 export const testConnection = async () => {
