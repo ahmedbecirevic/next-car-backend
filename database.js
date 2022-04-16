@@ -7,7 +7,7 @@ const sequelize = new Sequelize({
   database: config.DB_NAME,
   username: config.DB_USER,
   password: config.DB_HOST_PASSWORD,
-  dialect: config.DB_DIALECT,
+  dialect: 'postgres',
   port: config.DB_PORT,
   dialectOptions: {
     ssl: {
