@@ -7,10 +7,10 @@ import logger from './logger.js';
 import envVar, { validateEnvironmentVariables } from './config.js';
 import userRouter from './modules/user/userRouter.js';
 import carRouter from './modules/car/carRouter.js';
-// import { testConnection } from './database.js';
+import { testConnection } from './database.js';
 
 validateEnvironmentVariables();
-// testConnection();
+testConnection();
 
 const app = express();
 const port = envVar.PORT;
