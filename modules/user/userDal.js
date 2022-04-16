@@ -13,3 +13,5 @@ export const getUserByEmail = (email) => User.findOne({
     email,
   },
 });
+
+export const createUser = (user) => User.create(user);

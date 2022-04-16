@@ -8,6 +8,7 @@ import envVar, { validateEnvironmentVariables } from './config.js';
 import userRouter from './modules/user/userRouter.js';
 import carRouter from './modules/car/carRouter.js';
 import { testConnection } from './database.js';
+import './modules/user/passport.js';
 
 validateEnvironmentVariables();
 testConnection();
@@ -38,6 +39,8 @@ const specs = swaggerJsdoc(options);
 app.use(
   cors({
     origin: envVar.FRONTEND_ORIGIN,
+    // methods: ['GET', 'PUT', 'POST', 'PATCH', 'DELETE', 'OPTIONS', 'HEAD'],
+    // allowedHeaders:
   }),
   express.urlencoded({ extended: true }),
   express.json(),
