@@ -3,6 +3,7 @@ import cors from 'cors';
 import swaggerUiExpress from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import passport from 'passport';
+import cookieSession from 'cookie-session';
 
 import logger from './logger.js';
 import envVar, { validateEnvironmentVariables } from './config.js';
@@ -43,8 +44,13 @@ app.use(
   }),
   express.urlencoded({ extended: true }),
   express.json(),
+  cookieSession({
+    // a day
+    maxAge: 24 * 60 * 60 * 1000,
+    keys: [envVar.COOKIE_KEY],
+  }),
   passport.initialize(),
-  // passport.session(),
+  passport.session(),
 );
 
 router.get('/', (req, res) => {

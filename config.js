@@ -18,6 +18,7 @@ export default {
   JWT_SECRET: envVar.JWT_SECRET,
   GOOGLE_CLIENT_ID: envVar.GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET: envVar.GOOGLE_CLIENT_SECRET,
+  COOKIE_KEY: envVar.COOKIE_KEY,
 };
 
 export const validateEnvironmentVariables = () => {
@@ -34,6 +35,7 @@ export const validateEnvironmentVariables = () => {
     'JWT_SECRET',
     'GOOGLE_CLIENT_ID',
     'GOOGLE_CLIENT_SECRET',
+    'COOKIE_KEY',
   ];
   const missingEnvironmentVariables = [];
 
