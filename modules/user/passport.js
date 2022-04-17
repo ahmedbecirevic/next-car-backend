@@ -1,15 +1,13 @@
 import passport from 'passport';
 import GoogleStrategy from 'passport-google-oauth20';
-import envVar from '../../config.js';
+import config from '../../config.js';
+import logger from '../../logger.js';
 import {
   getUserByGoogleId,
   getUserById,
   getUserByEmail,
   createUser,
 } from './userDal.js';
-
-// const GoogleTokenStrategy = require('passport-google-oauth2').Strategy;
-// import google
 
 const GoogleTokenStrategy = GoogleStrategy.Strategy;
 
@@ -31,13 +29,15 @@ const getProfile = (profile) => {
 passport.use(
   new GoogleTokenStrategy(
     {
-      clientID: envVar.GOOGLE_CLIENT_ID,
-      clientSecret: envVar.GOOGLE_CLIENT_SECRET,
-      callbackURL: 'http://localhost:3000',
+      clientID: config.GOOGLE_CLIENT_ID,
+      clientSecret: config.GOOGLE_CLIENT_SECRET,
+      callbackURL: 'http://localhost:8080/user/auth/google/callback',
+      passReqToCallback: true,
     },
     //  Passport verify callback
-    async (accessToken, refreshToken, profile, done) => {
+    async (req, accessToken, refreshToken, profile, done) => {
       try {
+        logger.warn(profile);
         const existingGoogleUser = await getUserByGoogleId(profile.id);
 
         if (!existingGoogleUser) {
@@ -60,14 +60,30 @@ passport.use(
   ),
 );
 
-// Saves user's ID to a session
-passport.serializeUser((user, done) => {
-  done(null, user.id);
+passport.serializeUser((user, cb) => {
+  logger.warn('Serializing user:', user);
+  cb(null, user.id);
 });
 
-// Retrieve user's ID from a session
-passport.deserializeUser((id, done) => {
-  getUserById(id).then((user) => {
-    done(null, user);
+passport.deserializeUser(async (id, cb) => {
+  const user = await getUserById(id).catch((err) => {
+    logger.warn('Error deserializing', err);
+    cb(err, null);
   });
+
+  logger.warn('DeSerialized user', user);
+
+  if (user) { cb(null, user); }
 });
+
+// // Saves user's ID to a session
+// passport.serializeUser((user, done) => {
+//   done(null, user.id);
+// });
+
+// // Retrieve user's ID from a session
+// passport.deserializeUser((id, done) => {
+//   getUserById(id).then((user) => {
+//     done(null, user);
+//   });
+// });

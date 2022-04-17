@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import swaggerUiExpress from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
+import passport from 'passport';
 
 import logger from './logger.js';
 import envVar, { validateEnvironmentVariables } from './config.js';
@@ -39,11 +40,11 @@ const specs = swaggerJsdoc(options);
 app.use(
   cors({
     origin: envVar.FRONTEND_ORIGIN,
-    // methods: ['GET', 'PUT', 'POST', 'PATCH', 'DELETE', 'OPTIONS', 'HEAD'],
-    // allowedHeaders:
   }),
   express.urlencoded({ extended: true }),
   express.json(),
+  passport.initialize(),
+  // passport.session(),
 );
 
 router.get('/', (req, res) => {
