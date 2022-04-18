@@ -10,6 +10,7 @@ const logFormat = printf(({ level, message, stack }) => `${level}: ${stack || me
 export default createLogger({
   format: combine(
     format.colorize(),
+    format.splat(),
     timestamp({ format: 'DD-MM-YYYY HH:mm:ss' }),
     errors({ stack: true }),
     logFormat,

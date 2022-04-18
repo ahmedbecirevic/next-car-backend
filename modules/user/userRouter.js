@@ -1,6 +1,8 @@
 import express from 'express';
 import passport from 'passport';
-import logger from '../../logger.js';
+import config from '../../config.js';
+import { generateJwtAndRedirect } from './userController.js';
+import errorHandler from '../../utils/errorHandler.js';
 
 const router = express.Router();
 
@@ -18,15 +20,11 @@ router.get(
   passport.authenticate(
     'google',
     {
-      failureMessage: 'Cannot login!',
-      failureRedirect: 'http://localhost:3000/login/error',
-      successRedirect: 'http://localhost:3000/login/success',
+      failureRedirect: config.FRONTEND_ORIGIN,
+      session: false,
     },
   ),
-  (req, res) => {
-    logger.warn('User: ', req.user);
-    res.send('Thank you for signing in!');
-  },
+  errorHandler(generateJwtAndRedirect),
 );
 
 export default router;

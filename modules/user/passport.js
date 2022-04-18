@@ -37,7 +37,7 @@ passport.use(
     //  Passport verify callback
     async (req, accessToken, refreshToken, profile, done) => {
       try {
-        logger.warn(profile);
+        // logger.warn(profile);
         const existingGoogleUser = await getUserByGoogleId(profile.id);
 
         if (!existingGoogleUser) {
@@ -75,15 +75,3 @@ passport.deserializeUser(async (id, cb) => {
 
   if (user) { cb(null, user); }
 });
-
-// // Saves user's ID to a session
-// passport.serializeUser((user, done) => {
-//   done(null, user.id);
-// });
-
-// // Retrieve user's ID from a session
-// passport.deserializeUser((id, done) => {
-//   getUserById(id).then((user) => {
-//     done(null, user);
-//   });
-// });
