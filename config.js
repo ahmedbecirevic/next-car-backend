@@ -50,3 +50,20 @@ export const validateEnvironmentVariables = () => {
   }
   logger.info('Environment successfully configured!');
 };
+
+export const SWAGGER_OPTIONS = {
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'NextCar API',
+      version: '1.0.0',
+      description: 'Description for V1',
+    },
+    servers: [
+      {
+        url: 'http://localhost:8080',
+      },
+    ],
+  },
+  apis: ['./modules/car/carRouter.js', './modules/user/userRouter.js'],
+};

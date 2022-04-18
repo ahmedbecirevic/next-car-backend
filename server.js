@@ -3,10 +3,8 @@ import cors from 'cors';
 import swaggerUiExpress from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import passport from 'passport';
-import cookieSession from 'cookie-session';
-
 import logger from './logger.js';
-import envVar, { validateEnvironmentVariables } from './config.js';
+import envVar, { validateEnvironmentVariables, SWAGGER_OPTIONS } from './config.js';
 import userRouter from './modules/user/userRouter.js';
 import carRouter from './modules/car/carRouter.js';
 import { testConnection } from './database.js';
@@ -19,23 +17,7 @@ const app = express();
 const port = envVar.PORT;
 const router = express.Router();
 
-const options = {
-  definition: {
-    openapi: '3.0.0',
-    info: {
-      title: 'NextCar API',
-      version: '1.0.0',
-      description: 'Description for V1',
-    },
-    servers: [
-      {
-        url: 'http://localhost:8080',
-      },
-    ],
-  },
-  apis: ['./modules/car/carRouter.js', './modules/user/userRouter.js'],
-};
-
+const options = SWAGGER_OPTIONS;
 const specs = swaggerJsdoc(options);
 
 app.use(
@@ -44,13 +26,7 @@ app.use(
   }),
   express.urlencoded({ extended: true }),
   express.json(),
-  cookieSession({
-    // a day
-    maxAge: 24 * 60 * 60 * 1000,
-    keys: [envVar.COOKIE_KEY],
-  }),
   passport.initialize(),
-  passport.session(),
 );
 
 router.get('/', (req, res) => {
