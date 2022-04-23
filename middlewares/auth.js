@@ -9,7 +9,7 @@ export const generateAccessToken = (id, email) => jwt.sign(
   config.JWT_SECRET,
   {
     algorithm: 'HS256',
-    noTimestamp: true,
+    expiresIn: config.JWT_EXPIRE,
   },
 );
 

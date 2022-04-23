@@ -5,10 +5,7 @@ import config from '../../config.js';
 export const generateJwtAndRedirect = async (req, res) => {
   const { user } = req;
   const token = generateAccessToken(user?.id, user?.email);
-  res.cookie('x-auth-cookie', token, {
-    httpOnly: true,
-    secure: config.NODE_ENV === 'production',
-  });
+  res.cookie('x-auth-cookie', token);
 
   res.redirect(`${config.FRONTEND_ORIGIN}/login/success`);
 };

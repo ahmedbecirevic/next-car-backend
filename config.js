@@ -15,10 +15,10 @@ export default {
   DB_DIALECT: envVar.DB_DIALECT,
   DB_PORT: envVar.DB_PORT,
   FRONTEND_ORIGIN: envVar.FRONTEND_ORIGIN,
-  JWT_SECRET: envVar.JWT_SECRET,
   GOOGLE_CLIENT_ID: envVar.GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET: envVar.GOOGLE_CLIENT_SECRET,
-  COOKIE_KEY: envVar.COOKIE_KEY,
+  JWT_SECRET: envVar.JWT_SECRET,
+  JWT_EXPIRE: envVar.JWT_EXPIRE,
 };
 
 export const validateEnvironmentVariables = () => {
@@ -32,10 +32,10 @@ export const validateEnvironmentVariables = () => {
     'DB_DIALECT',
     'DB_PORT',
     'FRONTEND_ORIGIN',
-    'JWT_SECRET',
     'GOOGLE_CLIENT_ID',
     'GOOGLE_CLIENT_SECRET',
-    'COOKIE_KEY',
+    'JWT_SECRET',
+    'JWT_EXPIRE',
   ];
   const missingEnvironmentVariables = [];
 
