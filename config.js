@@ -17,6 +17,7 @@ export default {
   FRONTEND_ORIGIN: envVar.FRONTEND_ORIGIN,
   GOOGLE_CLIENT_ID: envVar.GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET: envVar.GOOGLE_CLIENT_SECRET,
+  GOOGLE_CALLBACK_API_URL: envVar.GOOGLE_CALLBACK_API_URL,
   JWT_SECRET: envVar.JWT_SECRET,
   JWT_EXPIRE: envVar.JWT_EXPIRE,
 };
@@ -36,6 +37,7 @@ export const validateEnvironmentVariables = () => {
     'GOOGLE_CLIENT_SECRET',
     'JWT_SECRET',
     'JWT_EXPIRE',
+    'GOOGLE_CALLBACK_API_URL',
   ];
   const missingEnvironmentVariables = [];
 

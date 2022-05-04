@@ -39,7 +39,7 @@ app.use(
 );
 
 app.use('/', router);
-app.use('/user', userRouter);
+app.use('/users', userRouter);
 app.use('/cars', carRouter);
 
 app.use((error, req, res, next) => {
