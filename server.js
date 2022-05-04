@@ -17,8 +17,7 @@ const app = express();
 const port = envVar.PORT;
 const router = express.Router();
 
-const options = SWAGGER_OPTIONS;
-const specs = swaggerJsdoc(options);
+const specs = swaggerJsdoc(SWAGGER_OPTIONS);
 
 app.use(
   cors({

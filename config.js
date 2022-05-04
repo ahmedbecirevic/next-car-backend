@@ -53,7 +53,7 @@ export const validateEnvironmentVariables = () => {
 
 export const SWAGGER_OPTIONS = {
   definition: {
-    openapi: '3.0.0',
+    openapi: '3.0.1',
     info: {
       title: 'NextCar API',
       version: '1.0.0',
@@ -64,6 +64,21 @@ export const SWAGGER_OPTIONS = {
         url: 'http://localhost:8080',
       },
     ],
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          in: 'header',
+        },
+      },
+    },
+    security: [{
+      bearerAuth: {
+        type: 'http',
+        scheme: 'bearer',
+      },
+    }],
   },
   apis: ['./modules/car/carRouter.js', './modules/user/userRouter.js'],
 };
