@@ -44,9 +44,7 @@ jobs:
         echo GOOGLE_CALLBACK_API_URL=${{ secrets.GOOGLE_CALLBACK_API_URL }} >> .env
         echo JWT_SECRET=${{ secrets.JWT_SECRET }} >> .env
         echo JWT_EXPIRE=${{ secrets.JWT_EXPIRE }} >> .env
-    - name: Execute migrations
     - run: cd db/ && npm run migrate && cd ../
-    - name: Run tests
     - run: npm run test
     - run: pm2 stop 0
     - run: pm2 start 0
