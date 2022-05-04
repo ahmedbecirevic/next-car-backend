@@ -45,7 +45,7 @@ jobs:
         echo JWT_SECRET=${{ secrets.JWT_SECRET }} >> .env
         echo JWT_EXPIRE=${{ secrets.JWT_EXPIRE }} >> .env
     - run: cd db/ && npm run migrate && cd ../
-    - run: npm run test
+    # - run: npm run test
     - run: pm2 stop 0
     - run: pm2 start 0
     - run: pm2 save

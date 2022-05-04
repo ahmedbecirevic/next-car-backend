@@ -7,5 +7,5 @@ export const generateJwtAndRedirect = async (req, res) => {
   const token = generateAccessToken(user?.id, user?.email);
   res.cookie('x-auth-cookie', token);
 
-  res.redirect(`${config.FRONTEND_ORIGIN}/login/success`);
+  res.redirect(`${config.FRONTEND_ORIGIN}/`);
 };
