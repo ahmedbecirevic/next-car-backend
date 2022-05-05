@@ -20,6 +20,7 @@ if (config.NODE_ENV === 'production') {
         rejectUnauthorized: false,
       },
     },
+    logging: false,
   };
 }
 

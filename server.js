@@ -2,12 +2,13 @@ import express from 'express';
 import cors from 'cors';
 import swaggerUiExpress from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
-
+import passport from 'passport';
 import logger from './logger.js';
-import envVar, { validateEnvironmentVariables } from './config.js';
+import envVar, { validateEnvironmentVariables, SWAGGER_OPTIONS } from './config.js';
 import userRouter from './modules/user/userRouter.js';
 import carRouter from './modules/car/carRouter.js';
 import { testConnection } from './database.js';
+import './modules/user/passport.js';
 
 validateEnvironmentVariables();
 testConnection();
@@ -16,24 +17,7 @@ const app = express();
 const port = envVar.PORT;
 const router = express.Router();
 
-const options = {
-  definition: {
-    openapi: '3.0.0',
-    info: {
-      title: 'NextCar API',
-      version: '1.0.0',
-      description: 'Description for V1',
-    },
-    servers: [
-      {
-        url: 'http://localhost:8080',
-      },
-    ],
-  },
-  apis: ['./modules/car/carRouter.js', './modules/user/userRouter.js'],
-};
-
-const specs = swaggerJsdoc(options);
+const specs = swaggerJsdoc(SWAGGER_OPTIONS);
 
 app.use(
   cors({
@@ -41,6 +25,7 @@ app.use(
   }),
   express.urlencoded({ extended: true }),
   express.json(),
+  passport.initialize(),
 );
 
 router.get('/', (req, res) => {
@@ -54,7 +39,7 @@ app.use(
 );
 
 app.use('/', router);
-app.use('/user', userRouter);
+app.use('/users', userRouter);
 app.use('/cars', carRouter);
 
 app.use((error, req, res, next) => {

@@ -15,6 +15,11 @@ export default {
   DB_DIALECT: envVar.DB_DIALECT,
   DB_PORT: envVar.DB_PORT,
   FRONTEND_ORIGIN: envVar.FRONTEND_ORIGIN,
+  GOOGLE_CLIENT_ID: envVar.GOOGLE_CLIENT_ID,
+  GOOGLE_CLIENT_SECRET: envVar.GOOGLE_CLIENT_SECRET,
+  GOOGLE_CALLBACK_API_URL: envVar.GOOGLE_CALLBACK_API_URL,
+  JWT_SECRET: envVar.JWT_SECRET,
+  JWT_EXPIRE: envVar.JWT_EXPIRE,
 };
 
 export const validateEnvironmentVariables = () => {
@@ -28,6 +33,11 @@ export const validateEnvironmentVariables = () => {
     'DB_DIALECT',
     'DB_PORT',
     'FRONTEND_ORIGIN',
+    'GOOGLE_CLIENT_ID',
+    'GOOGLE_CLIENT_SECRET',
+    'JWT_SECRET',
+    'JWT_EXPIRE',
+    'GOOGLE_CALLBACK_API_URL',
   ];
   const missingEnvironmentVariables = [];
 
@@ -41,4 +51,36 @@ export const validateEnvironmentVariables = () => {
     throw new Error(`❗ Missing environment variables:\n${missingEnvironmentVariables.join('\n')}`);
   }
   logger.info('Environment successfully configured!');
+};
+
+export const SWAGGER_OPTIONS = {
+  definition: {
+    openapi: '3.0.1',
+    info: {
+      title: 'NextCar API',
+      version: '1.0.0',
+      description: 'Description for V1',
+    },
+    servers: [
+      {
+        url: 'http://localhost:8080',
+      },
+    ],
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          in: 'header',
+        },
+      },
+    },
+    security: [{
+      bearerAuth: {
+        type: 'http',
+        scheme: 'bearer',
+      },
+    }],
+  },
+  apis: ['./modules/car/carRouter.js', './modules/user/userRouter.js'],
 };

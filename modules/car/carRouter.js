@@ -3,6 +3,7 @@ import errorHandler from '../../utils/errorHandler.js';
 import { getCar, getCars } from './carController.js';
 import { getCarByIdValidators } from './carValidators.js';
 import validationMiddleware from '../../middlewares/validationMiddleware.js';
+import { verifyAccessToken } from '../../middlewares/auth.js';
 
 const router = express.Router();
 
@@ -97,6 +98,7 @@ router.get(
  */
 router.get(
   '/:id',
+  verifyAccessToken,
   getCarByIdValidators,
   validationMiddleware,
   errorHandler(getCar),
