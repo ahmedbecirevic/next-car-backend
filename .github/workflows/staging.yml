@@ -8,9 +8,7 @@ on:
 
 jobs:
   build:
-
     runs-on: self-hosted
-    
     env:
       PORT: ${{ secrets.PORT }}
       DB_HOST: ${{ secrets.DB_HOST }}
@@ -28,6 +26,17 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
+    # - run: npm run test
+  
+  env-setup:
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
     - name: Create env file
       run: |
         touch .env
@@ -44,8 +53,29 @@ jobs:
         echo GOOGLE_CALLBACK_API_URL=${{ secrets.GOOGLE_CALLBACK_API_URL }} >> .env
         echo JWT_SECRET=${{ secrets.JWT_SECRET }} >> .env
         echo JWT_EXPIRE=${{ secrets.JWT_EXPIRE }} >> .env
+
+  db-migrate:
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - name: Run migrations
     - run: cd db/ && npm run migrate && cd ../
-    # - run: npm run test
+
+  start:
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - name: Server start
     - run: pm2 stop 0
     - run: pm2 start 0
     - run: pm2 save
