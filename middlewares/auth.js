@@ -14,13 +14,11 @@ export const generateAccessToken = (id, email) => jwt.sign(
 );
 
 export const verifyAccessToken = (req, res, next) => {
-  const authHeader = req.headers.authorization;
+  const token = res?.locals?.cookie?.token;
 
-  if (!authHeader) {
+  if (!token) {
     return res.status(401).json({ message: 'You are unauthorized' });
   }
-
-  const token = authHeader && authHeader.split(' ')[1];
 
   return jwt.verify(token, config.JWT_SECRET, (err, user) => {
     if (err) {
@@ -30,4 +28,17 @@ export const verifyAccessToken = (req, res, next) => {
 
     return next();
   });
+};
+
+export const cookieParser = (req, res, next) => {
+  const { headers: { cookie } } = req;
+  if (cookie) {
+    const values = cookie.split(';').reduce((prev, item) => {
+      const data = item.trim().split('=');
+
+      return { ...prev, [data[0]]: data[1] };
+    }, {});
+    res.locals.cookie = values;
+  } else res.locals.cookie = {};
+  next();
 };
