@@ -3,7 +3,7 @@ import errorHandler from '../../utils/errorHandler.js';
 import { getCar, getCars } from './carController.js';
 import { getCarByIdValidators } from './carValidators.js';
 import validationMiddleware from '../../middlewares/validationMiddleware.js';
-import { verifyAccessToken } from '../../middlewares/auth.js';
+import { cookieParser, verifyAccessToken } from '../../middlewares/auth.js';
 
 const router = express.Router();
 
@@ -68,6 +68,8 @@ const router = express.Router();
  */
 router.get(
   '/',
+  cookieParser,
+  verifyAccessToken,
   errorHandler(getCars),
 );
 
@@ -98,6 +100,7 @@ router.get(
  */
 router.get(
   '/:id',
+  cookieParser,
   verifyAccessToken,
   getCarByIdValidators,
   validationMiddleware,

@@ -1,5 +1,5 @@
 import * as carDal from './carDal.js';
 
-export const getCar = (carId) => carDal.getCarById(carId);
+export const getCar = (carId, userId) => carDal.getCarById(carId, userId);
 
-export const getCars = () => carDal.getCars();
+export const getCars = (userId) => carDal.getCars(userId);
