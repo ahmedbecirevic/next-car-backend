@@ -1,7 +1,7 @@
 import express from 'express';
 import errorHandler from '../../utils/errorHandler.js';
-import { getCar, getCars } from './carController.js';
-import { getCarByIdValidators } from './carValidators.js';
+import { getCar, getCars, addCar } from './carController.js';
+import { getCarByIdValidators, addCarBodyValidators } from './carValidators.js';
 import validationMiddleware from '../../middlewares/validationMiddleware.js';
 import { cookieParser, verifyAccessToken } from '../../middlewares/auth.js';
 
@@ -73,6 +73,65 @@ router.get(
   errorHandler(getCars),
 );
 
+//  *          required:
+//  *            - userName
+//  *          properties:
+//  *            userName:
+//  *              type: string
+
+/**
+ * @swagger
+ * /cars:
+ *   post:
+ *     summary: Creates new car.
+ *     tags: [Cars]
+ *     parameters:
+ *        - in: body
+ *          name: car
+ *          description: The car to create.
+ *          schema:
+ *            type: object
+ *            properties:
+ *              vin:
+ *                type: string
+ *                example: WDCGG8HB0AF462890
+ *              mileage:
+ *                type: double
+ *                example: 200200
+ *              fuelType:
+ *                type: string
+ *                example: diesel
+ *              productionYear:
+ *                type: date
+ *                example: 2010
+ *              description:
+ *                type: string
+ *                example: BMW M2 well taken care of.
+ *              horsePower:
+ *                type: int
+ *                example: 450
+ *              engineDisplacement:
+ *                type: double
+ *                example: 3.0
+ *     responses:
+ *       200:
+ *         description: Newly created car.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               items:
+ *                 $ref: '#/components/schemas/Car'
+ */
+router.post(
+  '/',
+  addCarBodyValidators,
+  validationMiddleware,
+  cookieParser,
+  verifyAccessToken,
+  errorHandler(addCar),
+);
+
 /**
  * @swagger
  * /cars/{id}:
@@ -100,10 +159,10 @@ router.get(
  */
 router.get(
   '/:id',
-  cookieParser,
-  verifyAccessToken,
   getCarByIdValidators,
   validationMiddleware,
+  cookieParser,
+  verifyAccessToken,
   errorHandler(getCar),
 );
 

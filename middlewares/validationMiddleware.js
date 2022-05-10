@@ -5,8 +5,7 @@ export default (req, res, next) => {
   if (errors.isEmpty()) {
     return next();
   }
-
-  console.error(errors);
+  // console.error(errors);
   const extractedErrors = errors.array().map((err) => ({ [err.param]: err.msg }));
 
   return res.status(422).json({
