@@ -14,7 +14,15 @@ export const generateAccessToken = (id, email) => jwt.sign(
 );
 
 export const verifyAccessToken = (req, res, next) => {
-  const token = res?.locals?.cookie?.token;
+  const authHeader = req.headers.authorization;
+  let token;
+
+  if (!authHeader) {
+    token = res?.locals?.cookie?.token;
+  } else {
+    // eslint-disable-next-line prefer-destructuring
+    token = authHeader.split(' ')[1];
+  }
 
   if (!token) {
     return res.status(401).json({ message: 'You are unauthorized' });
@@ -32,6 +40,7 @@ export const verifyAccessToken = (req, res, next) => {
 
 export const cookieParser = (req, res, next) => {
   const { headers: { cookie } } = req;
+
   if (cookie) {
     const values = cookie.split(';').reduce((prev, item) => {
       const data = item.trim().split('=');

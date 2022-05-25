@@ -22,6 +22,7 @@ const specs = swaggerJsdoc(SWAGGER_OPTIONS);
 app.use(
   cors({
     origin: envVar.FRONTEND_ORIGIN,
+    credentials: true,
   }),
   express.urlencoded({ extended: true }),
   express.json(),
