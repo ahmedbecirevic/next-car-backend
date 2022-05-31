@@ -13,7 +13,7 @@ const Car = sequelize.define('cars', {
     allowNull: false,
   },
   productionYear: {
-    type: Sequelize.DATE,
+    type: Sequelize.SMALLINT,
     allowNull: false,
   },
   description: {

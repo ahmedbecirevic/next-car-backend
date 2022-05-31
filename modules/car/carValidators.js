@@ -11,7 +11,7 @@ export const addCarBodyValidators = [
   body('vin').matches(REGEX.VIN),
   body('mileage').isDecimal(),
   body('fuelType').isAlpha(),
-  body('productionYear').isDate(),
+  body('productionYear').isNumeric(),
   body('description').isString(),
   body('horsePower').isNumeric(),
   body('engineDisplacement').isDecimal(),
