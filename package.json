@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/ahmedbecirevic/next-car-backend#readme",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.100.0",
     "chai": "^4.3.6",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
