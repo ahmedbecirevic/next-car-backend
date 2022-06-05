@@ -13,7 +13,7 @@ import { generateAccessToken } from '../middlewares/auth.js';
 
 describe('Car Tests', () => {
   let sandbox;
-  const token = generateAccessToken(1, 'ahmedtest@gmail.com');
+  const token = generateAccessToken(1, 'ahmedtest@gmail.com', 'image_url');
   const cars = [
     {
       id: 1,

@@ -1,10 +1,11 @@
 import jwt from 'jsonwebtoken';
 import config from '../config.js';
 
-export const generateAccessToken = (id, email) => jwt.sign(
+export const generateAccessToken = (id, email, picture) => jwt.sign(
   {
     id,
     email,
+    picture,
   },
   config.JWT_SECRET,
   {

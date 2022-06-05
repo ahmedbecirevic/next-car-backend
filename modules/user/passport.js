@@ -13,13 +13,14 @@ const GoogleTokenStrategy = GoogleStrategy.Strategy;
 
 const getProfile = (profile) => {
   const {
-    id, displayName, emails, provider,
+    id, displayName, emails, provider, photos,
   } = profile;
   if (emails && emails.length) {
-    const email = emails[0].value;
+    const email = emails[0]?.value;
+    const profilePictureUrl = photos[0]?.value;
 
     return {
-      googleId: id, name: displayName, email, provider,
+      googleId: id, name: displayName, email, provider, profilePictureUrl,
     };
   }
 
@@ -37,7 +38,6 @@ passport.use(
     //  Passport verify callback
     async (req, accessToken, refreshToken, profile, done) => {
       try {
-        // logger.warn(profile);
         const existingGoogleUser = await getUserByGoogleId(profile.id);
 
         if (!existingGoogleUser) {
