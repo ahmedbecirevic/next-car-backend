@@ -33,6 +33,9 @@ jobs:
         echo GOOGLE_CALLBACK_API_URL=${{ secrets.GOOGLE_CALLBACK_API_URL }} >> .env
         echo JWT_SECRET=${{ secrets.JWT_SECRET }} >> .env
         echo JWT_EXPIRE=${{ secrets.JWT_EXPIRE }} >> .env
+        echo SPACES_SECRET=${{ secrets.SPACES_SECRET }} >> .env
+        echo SPACES_BUCKET_NAME=${{ secrets.SPACES_BUCKET_NAME }} >> .env
+        echo SPACES_REGION=${{ secrets.SPACES_REGION }} >> .env
     - name: stop process
       run: pm2 stop 0
     - name: test
