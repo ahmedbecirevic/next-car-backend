@@ -1,6 +1,8 @@
 import express from 'express';
 import errorHandler from '../../utils/errorHandler.js';
-import { getCar, getCars, addCar } from './carController.js';
+import {
+  getCar, getCars, addCar, updateCar,
+} from './carController.js';
 import { getCarByIdValidators, addCarBodyValidators } from './carValidators.js';
 import validationMiddleware from '../../middlewares/validationMiddleware.js';
 import { cookieParser, verifyAccessToken } from '../../middlewares/auth.js';
@@ -164,6 +166,15 @@ router.get(
   cookieParser,
   verifyAccessToken,
   errorHandler(getCar),
+);
+
+router.put(
+  '/',
+  addCarBodyValidators,
+  validationMiddleware,
+  cookieParser,
+  verifyAccessToken,
+  errorHandler(updateCar),
 );
 
 export default router;

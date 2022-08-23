@@ -17,6 +17,9 @@ const User = sequelize.define('users', {
   googleId: {
     type: Sequelize.STRING,
   },
+  profilePictureUrl: {
+    type: Sequelize.STRING,
+  },
 }, {
   underscored: true,
 });

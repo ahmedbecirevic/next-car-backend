@@ -7,3 +7,7 @@ export const getImagesByCarId = (carId) => Image.findAll({
 });
 
 export const getImageById = (id) => Image.findByPk(id);
+
+export const createImage = (image) => Image.create(image);
+
+export const createMultipleImages = (images) => Image.bulkCreate(images);

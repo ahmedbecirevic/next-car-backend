@@ -20,7 +20,11 @@ const getProfile = (profile) => {
     const profilePictureUrl = photos[0]?.value;
 
     return {
-      googleId: id, name: displayName, email, provider, profilePictureUrl,
+      googleId: id,
+      name: displayName,
+      email,
+      provider,
+      profilePictureUrl,
     };
   }
 

@@ -9,6 +9,7 @@ const Image = sequelize.define('images', {
   },
 }, {
   underscored: true,
+  timestamps: false,
 });
 
 export default Image;

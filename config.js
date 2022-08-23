@@ -20,6 +20,9 @@ export default {
   GOOGLE_CALLBACK_API_URL: envVar.GOOGLE_CALLBACK_API_URL,
   JWT_SECRET: envVar.JWT_SECRET,
   JWT_EXPIRE: envVar.JWT_EXPIRE,
+  SPACES_SECRET: envVar.SPACES_SECRET,
+  SPACES_BUCKET_NAME: envVar.SPACES_BUCKET_NAME,
+  SPACES_REGION: envVar.SPACES_REGION,
 };
 
 export const validateEnvironmentVariables = () => {
@@ -38,6 +41,9 @@ export const validateEnvironmentVariables = () => {
     'JWT_SECRET',
     'JWT_EXPIRE',
     'GOOGLE_CALLBACK_API_URL',
+    'SPACES_SECRET',
+    'SPACES_BUCKET_NAME',
+    'SPACES_REGION',
   ];
   const missingEnvironmentVariables = [];
 

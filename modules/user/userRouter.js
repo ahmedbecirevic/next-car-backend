@@ -1,8 +1,9 @@
 import express from 'express';
 import passport from 'passport';
 import config from '../../config.js';
-import { generateJwtAndRedirect } from './userController.js';
+import { generateJwtAndRedirect, getDetails } from './userController.js';
 import errorHandler from '../../utils/errorHandler.js';
+import { cookieParser, verifyAccessToken } from '../../middlewares/auth.js';
 
 const router = express.Router();
 
@@ -72,6 +73,13 @@ router.get(
     },
   ),
   errorHandler(generateJwtAndRedirect),
+);
+
+router.get(
+  '/',
+  cookieParser,
+  verifyAccessToken,
+  errorHandler(getDetails),
 );
 
 export default router;

@@ -7,6 +7,8 @@ import logger from './logger.js';
 import envVar, { validateEnvironmentVariables, SWAGGER_OPTIONS } from './config.js';
 import userRouter from './modules/user/userRouter.js';
 import carRouter from './modules/car/carRouter.js';
+import postRouter from './modules/post/postRouter.js';
+import imageRouter from './modules/image/imageRouter.js';
 import { testConnection } from './database.js';
 import './modules/user/passport.js';
 
@@ -42,6 +44,8 @@ app.use(
 app.use('/', router);
 app.use('/users', userRouter);
 app.use('/cars', carRouter);
+app.use('/posts', postRouter);
+app.use('/images', imageRouter);
 
 app.use((error, req, res, next) => {
   if (res.headerSent) {

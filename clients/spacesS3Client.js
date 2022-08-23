@@ -1,44 +1,30 @@
-/* eslint-disable max-len */
-// Step 1: Import the S3Client object and all necessary SDK commands.
+/* eslint-disable consistent-return */
 import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import config from '../config.js';
+import logger from '../logger.js';
 
-// Step 2: The s3Client function validates your request and directs it to your Space's specified endpoint using the AWS SDK.
 const s3Client = new S3Client({
-  endpoint: 'https://nyc3.digitaloceanspaces.com', // Find your endpoint in the control panel, under Settings. Prepend "https://".
-  region: 'us-east-1', // Must be "us-east-1" when creating new Spaces. Otherwise, use the region in your endpoint (e.g. nyc3).
+  endpoint: 'https://fra1.digitaloceanspaces.com',
+  region: config.SPACES_REGION,
   credentials: {
-    accessKeyId: 'C58A976M583E23R1O00N', // Access key pair. You can create access key pairs using the control panel or API.
-    secretAccessKey: process.env.SPACES_SECRET, // Secret access key defined through an environment variable.
+    accessKeyId: 'DO00P23BVZZK99UFQY8G',
+    secretAccessKey: config.SPACES_SECRET,
   },
 });
 
-// Step 3: Define the parameters for the object you want to upload.
-const params = {
-  Bucket: 'example-space/example-folder/', // The path to the directory you want to upload the object to, starting with your Space name.
-  Key: 'hello-world.txt', // Object key, referenced whenever you want to access this file later.
-  Body: 'Hello, World!', // The object's contents. This variable is an object, not a string.
-  ACL: 'private', // Defines ACL permissions, such as private or public.
-  Metadata: { // Defines metadata tags.
-    'x-amz-meta-my-key': 'your-value',
-  },
-};
-
-// Step 4: Define a function that uploads your object using SDK's PutObjectCommand object and catches any errors.
-const uploadObject = async () => {
+// eslint-disable-next-line import/prefer-default-export
+export const uploadObject = async (name, imageData) => {
+  const params = {
+    Bucket: config.SPACES_BUCKET_NAME,
+    Key: name,
+    Body: imageData,
+    ACL: 'public-read',
+  };
   try {
     const data = await s3Client.send(new PutObjectCommand(params));
-    console.log(
-      `Successfully uploaded object: ${
-        params.Bucket
-      }/${
-        params.Key}`,
-    );
 
-    return data;
+    return [data, `https://${config.SPACES_BUCKET_NAME}.${config.SPACES_REGION}.cdn.digitaloceanspaces.com/${name}`];
   } catch (err) {
-    console.log('Error', err);
+    logger.error(err);
   }
 };
-
-// Step 5: Call the uploadObject function.
-// uploadObject();

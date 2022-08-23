@@ -2,6 +2,7 @@ import { Sequelize } from 'sequelize';
 
 import sequelize from '../../database.js';
 import Image from '../image/imageModel.js';
+import Post from '../post/postModel.js';
 
 const Car = sequelize.define('cars', {
   fuelType: {
@@ -33,6 +34,8 @@ const Car = sequelize.define('cars', {
 });
 
 Car.hasMany(Image);
+Car.hasMany(Post);
 Image.belongsTo(Car);
+Post.belongsTo(Car);
 
 export default Car;

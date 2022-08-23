@@ -14,3 +14,18 @@ export const getCars = (userId) => Car.findAll({
 });
 
 export const addCar = (car) => Car.create(car);
+
+export const getCarByUserId = (userId, carId) => Car.findOne({
+  where: {
+    userId,
+    id: carId,
+  },
+});
+
+export const updateCar = (car, id) => Car.update(
+  car,
+  {
+    where: { id },
+    returning: true,
+  },
+);

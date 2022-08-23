@@ -31,3 +31,11 @@ export const addCar = async (req, res) => {
 
   return responseOk(res, addedCar);
 };
+
+export const updateCar = async (req, res) => {
+  const car = req.body;
+
+  const updatedCar = await carService.updateCar(car);
+
+  return responseOk(res, updatedCar);
+};
