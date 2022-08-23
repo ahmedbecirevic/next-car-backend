@@ -39,8 +39,8 @@ jobs:
         echo SPACES_REGION=${{ secrets.SPACES_REGION }} >> .env
     - name: stop process
       run: pm2 stop 0
-    - name: test
-      run: npm run test
+    # - name: test
+    #   run: npm run test
     - name: Run migrations
       run: cd db/ && npm run migrate && cd ../
     - name: start process
