@@ -17,3 +17,5 @@ export const getPosts = (userId) => Post.findAll({
     },
   },
 });
+
+export const getPost = (id) => Post.findOne({ where: { id } });

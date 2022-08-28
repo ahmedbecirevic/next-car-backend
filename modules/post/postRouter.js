@@ -3,7 +3,9 @@ import { cookieParser, verifyAccessToken } from '../../middlewares/auth.js';
 import validationMiddleware from '../../middlewares/validationMiddleware.js';
 import errorHandler from '../../utils/errorHandler.js';
 import { checkIfCarBelongsToUser } from '../car/carDBValidators.js';
-import { addNewPost, getAllPostsForUser, getAllPostsByCar } from './postController.js';
+import {
+  addNewPost, getAllPostsForUser, getAllPostsByCar, getPost,
+} from './postController.js';
 import { addNewPostBodyValidators, getPostsByCarIdParamValidators } from './postValidators.js';
 
 const router = express.Router();
@@ -27,6 +29,13 @@ router.get(
   cookieParser,
   verifyAccessToken,
   errorHandler(getAllPostsForUser),
+);
+
+router.get(
+  '/:id',
+  cookieParser,
+  verifyAccessToken,
+  errorHandler(getPost),
 );
 
 router.get(
