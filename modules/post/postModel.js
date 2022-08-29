@@ -1,6 +1,7 @@
 import { Sequelize } from 'sequelize';
 
 import sequelize from '../../database.js';
+import Image from '../image/imageModel.js';
 
 const Post = sequelize.define('posts', {
   condition: {
@@ -22,5 +23,8 @@ const Post = sequelize.define('posts', {
 }, {
   underscored: true,
 });
+
+Post.hasMany(Image);
+Image.belongsTo(Post);
 
 export default Post;

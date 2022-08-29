@@ -6,6 +6,12 @@ export const getImagesByCarId = (carId) => Image.findAll({
   },
 });
 
+export const getImagesByPostId = (postId) => Image.findAll({
+  where: {
+    postId,
+  },
+});
+
 export const getImageById = (id) => Image.findByPk(id);
 
 export const createImage = (image) => Image.create(image);

@@ -4,9 +4,9 @@ import validationMiddleware from '../../middlewares/validationMiddleware.js';
 import errorHandler from '../../utils/errorHandler.js';
 import { checkIfCarBelongsToUser } from '../car/carDBValidators.js';
 import {
-  addNewPost, getAllPostsForUser, getAllPostsByCar, getPost,
+  addNewPost, getAllPostsForUser, getAllPostsByCar, getPost, getPostWithImages,
 } from './postController.js';
-import { addNewPostBodyValidators, getPostsByCarIdParamValidators } from './postValidators.js';
+import { addNewPostBodyValidators, getPostsByCarIdParamValidators, getPostByIdParamValidators } from './postValidators.js';
 
 const router = express.Router();
 
@@ -35,6 +35,8 @@ router.get(
   '/:id',
   cookieParser,
   verifyAccessToken,
+  getPostByIdParamValidators,
+  validationMiddleware,
   errorHandler(getPost),
 );
 
@@ -56,6 +58,15 @@ router.post(
   validationMiddleware,
   checkIfCarBelongsToUser,
   errorHandler(addNewPost),
+);
+
+router.get(
+  '/:id/images',
+  cookieParser,
+  verifyAccessToken,
+  getPostByIdParamValidators,
+  validationMiddleware,
+  errorHandler(getPostWithImages),
 );
 
 export default router;

@@ -1,4 +1,5 @@
 import Car from '../car/carModel.js';
+import Image from '../image/imageModel.js';
 import Post from './postModel.js';
 
 export const createPost = (post) => Post.create(post);
@@ -19,3 +20,5 @@ export const getPosts = (userId) => Post.findAll({
 });
 
 export const getPost = (id) => Post.findOne({ where: { id } });
+
+export const getPostAndAllImages = (id) => Post.findAll({ where: { id }, include: Image });
