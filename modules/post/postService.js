@@ -1,8 +1,6 @@
-// import { createImage } from '../image/imageDal.js';
 import * as postDal from './postDal.js';
 
 export const addPost = async (post) => {
-  // const createdImage = await createImage(image);
   const res = await postDal.createPost(post);
 
   return res;
@@ -10,7 +8,15 @@ export const addPost = async (post) => {
 
 export const getPostsByCar = (carId) => postDal.getPostsByCarId(carId);
 
-export const getAllPosts = (userId) => postDal.getPosts(userId);
+export const getAllPostsByUser = (userId) => postDal.getPosts(userId);
+
+export const getAll = async (page = 0, size = 10) => {
+  const limit = size;
+  const offset = page * size;
+  const posts = await postDal.getAllPosts(offset, limit);
+
+  return posts;
+};
 
 export const getPostById = (id) => postDal.getPost(id);
 

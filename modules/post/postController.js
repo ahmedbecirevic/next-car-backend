@@ -1,9 +1,16 @@
 import {
-  addPost, getAllPosts, getPostById, getPostIncludeImages,
+  addPost, getAll, getAllPostsByUser, getPostById, getPostIncludeImages,
 } from './postService.js';
 
+export const getAllPosts = async (req, res) => {
+  const { page, size } = req.query;
+  const posts = await getAll(page, size);
+
+  return res.status(200).json(posts);
+};
+
 export const getAllPostsForUser = async (req, res) => {
-  const posts = await getAllPosts(req.user?.id);
+  const posts = await getAllPostsByUser(req.user?.id);
 
   return res.status(200).json(posts);
 };

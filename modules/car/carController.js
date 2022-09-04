@@ -5,10 +5,6 @@ import * as carService from './carService.js';
 export const getCars = async (req, res) => {
   const cars = await carService.getCars(req?.user?.id);
 
-  if (!cars || cars?.length === 0) {
-    return responseNotFound(res);
-  }
-
   return responseOk(res, cars);
 };
 

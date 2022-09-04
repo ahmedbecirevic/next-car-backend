@@ -17,3 +17,5 @@ export const getImageById = (id) => Image.findByPk(id);
 export const createImage = (image) => Image.create(image);
 
 export const createMultipleImages = (images) => Image.bulkCreate(images);
+
+export const deleteImageById = (id) => Image.destroy({ where: { id } });

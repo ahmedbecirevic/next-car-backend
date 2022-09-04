@@ -19,6 +19,13 @@ export const getPosts = (userId) => Post.findAll({
   },
 });
 
+export const getAllPosts = (offset, limit) => Post.findAndCountAll({
+  offset,
+  limit,
+  order: [['createdAt', 'DESC']],
+  include: [Image, Car],
+});
+
 export const getPost = (id) => Post.findOne({ where: { id } });
 
 export const getPostAndAllImages = (id) => Post.findAll({ where: { id }, include: Image });

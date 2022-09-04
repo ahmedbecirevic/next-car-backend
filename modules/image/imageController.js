@@ -1,8 +1,13 @@
-import { createImages } from './imageService.js';
+import * as imageService from './imageService.js';
 
-// eslint-disable-next-line import/prefer-default-export
 export const uploadImages = async (req, res) => {
-  const images = await createImages(req?.files, req.query?.carId, req.query?.postId);
+  const images = await imageService.createImages(req?.files, req.query?.carId, req.query?.postId);
 
   return res.status(200).json(images);
+};
+
+export const deleteImage = async (req, res) => {
+  await imageService.deleteImage(req.params?.id);
+
+  return res.status(204).json();
 };
