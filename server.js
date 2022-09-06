@@ -9,6 +9,7 @@ import userRouter from './modules/user/userRouter.js';
 import carRouter from './modules/car/carRouter.js';
 import postRouter from './modules/post/postRouter.js';
 import imageRouter from './modules/image/imageRouter.js';
+import purchaseHistoryRouter from './modules/purchaseHistory/purchaseHistoryRouter.js';
 import { testConnection } from './database.js';
 import './modules/user/passport.js';
 
@@ -46,6 +47,7 @@ app.use('/users', userRouter);
 app.use('/cars', carRouter);
 app.use('/posts', postRouter);
 app.use('/images', imageRouter);
+app.use('/purchase-history', purchaseHistoryRouter);
 
 app.use((error, req, res, next) => {
   if (res.headerSent) {

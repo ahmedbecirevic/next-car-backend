@@ -2,6 +2,7 @@ import { Sequelize } from 'sequelize';
 
 import sequelize from '../../database.js';
 import Image from '../image/imageModel.js';
+import PurchaseHistory from '../purchaseHistory/purchaseHistoryModel.js';
 
 const Post = sequelize.define('posts', {
   condition: {
@@ -25,6 +26,8 @@ const Post = sequelize.define('posts', {
 });
 
 Post.hasMany(Image);
+Post.hasMany(PurchaseHistory);
 Image.belongsTo(Post);
+PurchaseHistory.belongsTo(Post);
 
 export default Post;

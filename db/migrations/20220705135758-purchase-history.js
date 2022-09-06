@@ -11,7 +11,7 @@ module.exports = {
         type: Sequelize.ENUM('REQUESTED', 'FINISHED'),
         allowNull: true,
       },
-      listing_id: {
+      post_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
@@ -26,6 +26,14 @@ module.exports = {
           model: 'users',
           key: 'id',
         },
+      },
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: true,
+      },
+      updated_at: {
+        type: Sequelize.DATE,
+        allowNull: true,
       },
     });
   },

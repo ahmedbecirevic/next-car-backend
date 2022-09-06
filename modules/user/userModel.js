@@ -2,6 +2,7 @@ import { Sequelize } from 'sequelize';
 
 import sequelize from '../../database.js';
 import Car from '../car/carModel.js';
+import PurchaseHistory from '../purchaseHistory/purchaseHistoryModel.js';
 
 const User = sequelize.define('users', {
   email: {
@@ -27,4 +28,6 @@ const User = sequelize.define('users', {
 export default User;
 
 User.hasMany(Car);
+User.hasMany(PurchaseHistory);
 Car.belongsTo(User);
+PurchaseHistory.belongsTo(User);
