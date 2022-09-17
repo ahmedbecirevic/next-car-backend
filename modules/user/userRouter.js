@@ -1,7 +1,7 @@
 import express from 'express';
 import passport from 'passport';
 import config from '../../config.js';
-import { generateJwtAndRedirect, getDetails } from './userController.js';
+import { generateJwtAndRedirect, getDetails, updateUserPhoneNumber } from './userController.js';
 import errorHandler from '../../utils/errorHandler.js';
 import { cookieParser, verifyAccessToken } from '../../middlewares/auth.js';
 
@@ -80,6 +80,13 @@ router.get(
   cookieParser,
   verifyAccessToken,
   errorHandler(getDetails),
+);
+
+router.post(
+  '/phone-number',
+  cookieParser,
+  verifyAccessToken,
+  errorHandler(updateUserPhoneNumber),
 );
 
 export default router;

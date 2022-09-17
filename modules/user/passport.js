@@ -21,7 +21,7 @@ const getProfile = (profile) => {
 
     return {
       googleId: id,
-      name: displayName,
+      displayName,
       email,
       provider,
       profilePictureUrl,

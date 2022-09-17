@@ -8,7 +8,7 @@ module.exports = {
         allowNull: false,
       },
       status: {
-        type: Sequelize.ENUM('REQUESTED', 'FINISHED'),
+        type: Sequelize.ENUM('REQUESTED', 'FINISHED', 'BOUGHT', 'SOLD', 'CANCELED'),
         allowNull: true,
       },
       post_id: {

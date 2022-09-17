@@ -14,3 +14,9 @@ export const getPurchaseHistoryForUser = async (req, res) => {
 
   return responseOk(res, purchaseHistory);
 };
+
+export const updatePurchaseHistory = async (req, res) => {
+  const purchaseHistory = await purchaseHistoryService.update(req.body);
+
+  return responseOk(res, purchaseHistory);
+};

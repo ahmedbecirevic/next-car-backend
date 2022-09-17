@@ -15,3 +15,8 @@ export const getUserByEmail = (email) => User.findOne({
 });
 
 export const createUser = (user) => User.create(user);
+
+export const updateUser = (user) => User.update(user, {
+  where: { id: user?.id },
+  returning: true,
+});

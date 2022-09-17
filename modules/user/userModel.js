@@ -21,6 +21,9 @@ const User = sequelize.define('users', {
   profilePictureUrl: {
     type: Sequelize.STRING,
   },
+  displayName: {
+    type: Sequelize.STRING,
+  },
 }, {
   underscored: true,
 });

@@ -9,7 +9,8 @@ export const addCar = (car) => carDal.addCar(car);
 export const updateCar = async (car) => {
   const { id } = car || {};
 
-  const [affectedRows, updatedCar] = await carDal.updateCar(car, id);
+  // eslint-disable-next-line no-unused-vars
+  const [_, updatedCar] = await carDal.updateCar(car, id) || [];
 
   return updatedCar[0];
 };

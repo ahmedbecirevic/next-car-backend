@@ -1,5 +1,6 @@
+import { responseOk } from '../../utils/responses.js';
 import {
-  addPost, getAll, getAllPostsByUser, getPostById, getPostIncludeImages,
+  addPost, getAll, getAllPostsByUser, getPostById, getPostIncludeImages, updatePost,
 } from './postService.js';
 
 export const getAllPosts = async (req, res) => {
@@ -35,4 +36,10 @@ export const getPostWithImages = async (req, res) => {
   const post = await getPostIncludeImages(req.params.id);
 
   return res.status(200).json(post);
+};
+
+export const updateCarById = async (req, res) => {
+  const updatedPost = await updatePost(req.body);
+
+  return responseOk(res, updatedPost);
 };

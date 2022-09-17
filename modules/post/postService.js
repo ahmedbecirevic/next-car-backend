@@ -25,3 +25,10 @@ export const getPostIncludeImages = async (id) => {
 
   return post[0];
 };
+
+export const updatePost = async (post) => {
+  // eslint-disable-next-line no-unused-vars
+  const [_, updatedPost] = await postDal.updatePost(post) || [];
+
+  return updatedPost[0];
+};
