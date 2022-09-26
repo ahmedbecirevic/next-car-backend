@@ -4,7 +4,12 @@ import validationMiddleware from '../../middlewares/validationMiddleware.js';
 import errorHandler from '../../utils/errorHandler.js';
 import { checkIfCarBelongsToUser } from '../car/carDBValidators.js';
 import {
-  addNewPost, getAllPostsForUser, getAllPostsByCar, getPost, getPostWithImages, getAllPosts, updateCarById,
+  addNewPost, getAllPostsForUser,
+  getAllPostsByCar,
+  getPost,
+  getPostWithImages,
+  getAllPosts,
+  updateCarById,
 } from './postController.js';
 import { addNewPostBodyValidators, getPostsByCarIdParamValidators, getPostByIdParamValidators } from './postValidators.js';
 

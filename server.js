@@ -28,7 +28,7 @@ app.use(
     credentials: true,
   }),
   express.urlencoded({ extended: true }),
-  express.json(),
+  express.json({ limit: '50mb' }),
   passport.initialize(),
 );
 
